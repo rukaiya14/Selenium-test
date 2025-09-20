@@ -4,24 +4,24 @@ This repository contains Selenium TestNG automation examples for:
 
 1. Opening a browser and navigating to Google.
 2. Performing automatic calculation using an online scientific calculator.
+3. Searching for products on Amazon India and fetching product titles.
 
 ---
 
-## Prerequisites
+## Dependencies
 
-- Java JDK installed (version 21 or compatible)
-- Chrome browser installed
-- ChromeDriver downloaded and path set in the test files. [Click here to Download ChromeDriver](https://developer.chrome.com/docs/chromedriver/downloads)
-- TestNG added to the project dependencies
-- Selenium WebDriver added to the project dependencies
+- Java JDK (version 21 or compatible)
+- Chrome browser
+- ChromeDriver [Click here to Download ChromeDriver](https://developer.chrome.com/docs/chromedriver/downloads)
+- Add TestNG to the project dependencies
+- Add Selenium WebDriver to the project dependencies
 
 ---
 
 
 ## Test 1: Open Browser and Navigate to Google
-
-**File:** `DemoTest.java`  
-**Description:** This test opens Chrome, navigates to Google, waits for 3 seconds, verifies the page title, and then closes the browser.  
+ 
+This test opens Chrome, navigates to Google, waits for 3 seconds, verifies the page title, and then closes the browser.  
 
 ```java
 package com.selenium;
@@ -49,18 +49,9 @@ public class DemoTest {
 }
 ```
 
-**Steps to Run:**
-
-1. Ensure `chromedriver.exe` is in your system PATH or provide the full path in your code.  
-2. Run this test via TestNG or your IDE.  
-3. The console will display the test results.
-
----
-
 ## Test 2: Auto Calculation Using Online Scientific Calculator
-
-**File:** `CalculatorTest.java`  
-**Description:** This test performs the subtraction operation `9 - 4` using the TCS iON Scientific Calculator, logs the result in TestNG reports, and asserts the result.
+  
+This test performs the subtraction operation `9 - 4` using the TCS iON Scientific Calculator, logs the result in TestNG reports, and asserts the result.
 
 ```java
 package com.selenium;
@@ -124,19 +115,80 @@ public class CalculatorTest {
 }
 ```
 
-**Steps to Run:**
+## Test 3: Amazon Product Search
 
-1. Ensure the ChromeDriver path matches your system path.  
-2. Run the test via TestNG or your IDE.  
-3. The result of the calculation will appear in the TestNG report and console.  
+Searches for a product on amazon.com and fetches the first 5 product titles. Includes small holds after operations and a 5-second pause before closing the browser.
 
----
+```java
+package com.selenium;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import java.time.Duration;
+import java.util.List;
+
+public class AmazonSearchTest {
+
+    @Test
+    public void searchAmazonProduct() {
+        // Set ChromeDriver path
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\SeleniumDemo\\chromedriver-win64\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        try {
+            // Open Amazon India
+            driver.get("https://www.amazon.in/");
+
+            // Wait a bit for page to load
+            Thread.sleep(1000);
+
+            // Locate the search box
+            WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
+            Thread.sleep(300);
+
+            // Type the search query and press ENTER
+            searchBox.sendKeys("laptop");
+            searchBox.sendKeys(Keys.ENTER);
+
+            // Explicit wait for search results
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.s-main-slot h2")));
+
+            // Get first 5 product titles
+            List<WebElement> products = driver.findElements(By.cssSelector("div.s-main-slot h2 span"));
+            int count = Math.min(products.size(), 5);
+
+            for (int i = 0; i < count; i++) {
+                String title = products.get(i).getText();
+                System.out.println("Product " + (i + 1) + ": " + title);
+                Reporter.log("Product " + (i + 1) + ": " + title, true);
+            }
+
+            Thread.sleep(1000); // small hold before closing
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            driver.quit();
+        }
+    }
+}
+```
 
 ## Notes
 
-- Use `Thread.sleep()` to add small hold times to allow the UI to update between button clicks.  
-- Make sure the IDs for calculator buttons (`keyPad_btn9`, `keyPad_btnMinus`, etc.) match the current calculator page.  
-- You can extend the calculator test for other operations by clicking the respective buttons and updating the expected result.  
+- Use Thread.sleep() for small hold times to allow UI updates between operations.
+- Ensure all element IDs and CSS selectors match the current website versions.
+- Results are logged to both console and TestNG reports. 
 
 ---
 

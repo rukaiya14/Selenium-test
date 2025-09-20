@@ -11,11 +11,12 @@ This repository contains Selenium TestNG automation examples for:
 
 - Java JDK installed (version 21 or compatible)
 - Chrome browser installed
-- ChromeDriver downloaded and path set in the test files
+- ChromeDriver downloaded and path set in the test files [Download ChromeDriver](https://developer.chrome.com/docs/chromedriver/downloads)
 - TestNG added to the project dependencies
 - Selenium WebDriver added to the project dependencies
 
 ---
+
 
 ## Test 1: Open Browser and Navigate to Google
 

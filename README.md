@@ -11,7 +11,6 @@ This repository contains Selenium TestNG automation examples for:
 ## Dependencies
 
 - Java JDK (version 21 or compatible)
-- VS CODE or Eclipse IDE
 - Chrome browser
 - ChromeDriver [Click here to Download ChromeDriver](https://developer.chrome.com/docs/chromedriver/downloads)
 - Add TestNG to the project dependencies

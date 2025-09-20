@@ -1,9 +1,28 @@
-YOU RUN ANY OF THE BELOW TESTS BY RUNNING THE CODE IN DemoTest.java FILE
+# Selenium Demo Tests
 
+This repository contains Selenium TestNG automation examples for:
 
-------------------------------------------------------------------------------------------------
-FOR OPENING BROWSERS:
--------------------------------------------------------------------------------------------------
+1. Opening a browser and navigating to Google.
+2. Performing automatic calculation using an online scientific calculator.
+
+---
+
+## Prerequisites
+
+- Java JDK installed (version 21 or compatible)
+- Chrome browser installed
+- ChromeDriver downloaded and path set in the test files
+- TestNG added to the project dependencies
+- Selenium WebDriver added to the project dependencies
+
+---
+
+## Test 1: Open Browser and Navigate to Google
+
+**File:** `DemoTest.java`  
+**Description:** This test opens Chrome, navigates to Google, waits for 3 seconds, verifies the page title, and then closes the browser.  
+
+```java
 package com.selenium;
 
 import org.openqa.selenium.WebDriver;
@@ -20,15 +39,29 @@ public class DemoTest {
         // Wait for 3 seconds to hold the page
         Thread.sleep(3000);
 
+        // Verify page title
         Assert.assertEquals(driver.getTitle(), "Google");
+
+        // Close the browser
         driver.quit();
     }
 }
+```
 
+**Steps to Run:**
 
---------------------------------------------------------------------------------------------------
-FOR AUTO CALCULATION:
---------------------------------------------------------------------------------------------------
+1. Ensure `chromedriver.exe` is in your system PATH or provide the full path in your code.  
+2. Run this test via TestNG or your IDE.  
+3. The console will display the test results.
+
+---
+
+## Test 2: Auto Calculation Using Online Scientific Calculator
+
+**File:** `CalculatorTest.java`  
+**Description:** This test performs the subtraction operation `9 - 4` using the TCS iON Scientific Calculator, logs the result in TestNG reports, and asserts the result.
+
+```java
 package com.selenium;
 
 import org.openqa.selenium.By;
@@ -48,7 +81,7 @@ public class CalculatorTest {
     @BeforeClass
     public void setup() {
         // Set ChromeDriver path
-        System.setProperty("webdriver.chrome.driver", "C:\chromedriver-win64\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver-win64\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.tcsion.com/OnlineAssessment/ScientificCalculator/Calculator.html");
@@ -59,7 +92,7 @@ public class CalculatorTest {
         
         // Perform 9 - 4 with small hold times
         driver.findElement(By.id("keyPad_btn9")).click();
-        Thread.sleep(300); // hold 0.3 seconds
+        Thread.sleep(300); 
         driver.findElement(By.id("keyPad_btnMinus")).click();
         Thread.sleep(300);
         driver.findElement(By.id("keyPad_btn4")).click();
@@ -88,3 +121,24 @@ public class CalculatorTest {
         }
     }
 }
+```
+
+**Steps to Run:**
+
+1. Ensure the ChromeDriver path matches your system path.  
+2. Run the test via TestNG or your IDE.  
+3. The result of the calculation will appear in the TestNG report and console.  
+
+---
+
+## Notes
+
+- Use `Thread.sleep()` to add small hold times to allow the UI to update between button clicks.  
+- Make sure the IDs for calculator buttons (`keyPad_btn9`, `keyPad_btnMinus`, etc.) match the current calculator page.  
+- You can extend the calculator test for other operations by clicking the respective buttons and updating the expected result.  
+
+---
+
+## Author
+
+- Vedant Konde

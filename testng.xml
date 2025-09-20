@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="SeleniumDemoSuite">
-    <test name="SeleniumTests">
-        <packages>
-            <package name="com.selenium"/>
-        </packages>
+<suite name="SeleniumSuite">
+    <test name="DemoTestRun">
+        <classes>
+            <class name="com.selenium.DemoTest"/>
+        </classes>
     </test>
 </suite>

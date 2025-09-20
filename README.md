@@ -48,7 +48,7 @@ public class CalculatorTest {
     @BeforeClass
     public void setup() {
         // Set ChromeDriver path
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\SeleniumDemo\\chromedriver-win64\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\chromedriver-win64\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.tcsion.com/OnlineAssessment/ScientificCalculator/Calculator.html");

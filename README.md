@@ -140,7 +140,7 @@ public class AmazonSearchTest {
     @Test
     public void searchAmazonProduct() {
         // Set ChromeDriver path
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\SeleniumDemo\\chromedriver-win64\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver-win64\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 

@@ -129,27 +129,22 @@ public void testAmazonProductSearch() {
 }
 
     // This test failed previously due to locator issues, now fixed with link text
+// This test should stabilize by removing the unnecessary wait for the search box.
 @Test
 public void testAmazonNavigateToTodaysDeals() {
     System.out.println("Executing test: testAmazonNavigateToTodaysDeals");
 
     try {
-        // --- NEW FIX: Wait for a stable anchor point (Search Box) first ---
-        WebDriverWait stableWait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        stableWait.until(
-            ExpectedConditions.visibilityOfElementLocated(By.id("twotabsearchtextbox"))
-        );
-        // This ensures the page is fully loaded and all pop-ups have been handled/passed.
-        // ------------------------------------------------------------------
+        // --- REMOVE: The unnecessary and failing stableWait for 'twotabsearchtextbox' ---
 
         // Define the explicit wait object for the Deals link
-        WebDriverWait clickWait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait clickWait = new WebDriverWait(driver, Duration.ofSeconds(15)); 
 
         // Wait until the "Today's Deals" link is clickable
         WebElement todaysDealsLink = clickWait.until(
-             // Using the linkText that was previously failing, but now stableWait should protect it.
+             // Use the robust locator based on the link's visible text
              ExpectedConditions.elementToBeClickable(By.linkText("Today's Deals")) 
-             // Alternative: ExpectedConditions.elementToBeClickable(By.partialLinkText("Deals"))
+             // If linkText fails again, try: ExpectedConditions.elementToBeClickable(By.partialLinkText("Deals"))
         );
 
         todaysDealsLink.click();

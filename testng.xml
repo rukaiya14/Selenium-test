@@ -5,4 +5,11 @@
             <class name="com.selenium.DemoTest"/>
         </classes>
     </test>
+
+     <test name="AmazonTests">
+        <classes>
+            <class name="com.selenium.amazon.AmazonSearchTest"/>
+        </classes>
+    </test>
+
 </suite>
